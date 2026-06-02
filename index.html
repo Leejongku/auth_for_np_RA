@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>산단 연구원 부서별 공통권한 현황</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+:root {
+  --bg: #f8f9fb;
+  --surface: #ffffff;
+  --surface2: #f1f4f9;
+  --border: rgba(0,0,0,0.1);
+  --text: #1a1a2e;
+  --text2: #5a6478;
+  --text3: #9aa0ad;
+  --blue: #2563eb;
+  --blue-light: #eff6ff;
+  --green: #059669;
+  --green-light: #ecfdf5;
+  --amber: #d97706;
+  --amber-light: #fffbeb;
+  --red: #dc2626;
+  --red-light: #fef2f2;
+  --purple: #7c3aed;
+  --purple-light: #f5f3ff;
+  --radius: 10px;
+  --radius-lg: 14px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Malgun Gothic', '맑은 고딕', -apple-system, sans-serif; background: var(--bg); color: var(--text); font-size: 13px; }
+
+/* Header */
+.header { background: var(--surface); border-bottom: 1px solid var(--border); padding: 0 24px; height: 56px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
+.header-left { display: flex; align-items: center; gap: 12px; }
+.header-logo { width: 32px; height: 32px; background: var(--blue); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 16px; }
+.header-title { font-size: 15px; font-weight: 600; color: var(--text); }
+.header-sub { font-size: 11px; color: var(--text2); }
+.header-badge { font-size: 10px; padding: 3px 8px; border-radius: 20px; background: var(--blue-light); color: var(--blue); font-weight: 500; }
+
+/* Layout */
+.container { max-width: 1200px; margin: 0 auto; padding: 20px 16px; }
+.page-title { font-size: 18px; font-weight: 600; margin-bottom: 4px; }
+.page-sub { font-size: 12px; color: var(--text2); margin-bottom: 20px; }
+
+/* KPI */
+.kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 20px; }
+.kpi { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; }
+.kpi-label { font-size: 11px; color: var(--text2); margin-bottom: 6px; }
+.kpi-value { font-size: 26px; font-weight: 700; line-height: 1; margin-bottom: 4px; }
+.kpi-sub { font-size: 10px; color: var(--text3); }
+.kpi.warn { border-color: var(--amber); background: var(--amber-light); }
+.kpi.warn .kpi-label { color: var(--amber); }
+.kpi.warn .kpi-value { color: var(--amber); }
+
+/* Cards */
+.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px; }
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 16px; }
+.card-title { font-size: 13px; font-weight: 600; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
+.full-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 16px; margin-bottom: 16px; }
+.sec-label { font-size: 11px; font-weight: 600; color: var(--text2); letter-spacing: .05em; padding-bottom: 8px; border-bottom: 1px solid var(--border); margin: 20px 0 14px; text-transform: none; }
+
+/* Tabs */
+.tab-bar { display: flex; gap: 6px; margin-bottom: 14px; flex-wrap: wrap; }
+.tab { font-size: 11px; padding: 5px 12px; border-radius: 20px; border: 1px solid var(--border); cursor: pointer; background: transparent; color: var(--text2); transition: all .15s; }
+.tab:hover { background: var(--surface2); }
+.tab.on { background: var(--blue); color: #fff; border-color: var(--blue); }
+
+/* Table */
+.tbl-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 11px; }
+th { text-align: left; padding: 8px 10px; font-weight: 600; color: var(--text2); border-bottom: 2px solid var(--border); background: var(--surface2); white-space: nowrap; }
+td { padding: 7px 10px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: var(--surface2); }
+
+/* Badge */
+.badge { display: inline-block; font-size: 10px; padding: 2px 7px; border-radius: 20px; font-weight: 500; white-space: nowrap; }
+.b-blue { background: var(--blue-light); color: var(--blue); }
+.b-green { background: var(--green-light); color: var(--green); }
+.b-amber { background: var(--amber-light); color: var(--amber); }
+.b-red { background: var(--red-light); color: var(--red); }
+.b-purple { background: var(--purple-light); color: var(--purple); }
+.b-gray { background: var(--surface2); color: var(--text2); }
+
+/* Heatmap */
+.heat-wrap { overflow-x: auto; }
+.heat-table { border-collapse: separate; border-spacing: 3px; width: 100%; }
+.heat-table th { font-size: 9px; color: var(--text2); padding: 3px 2px; text-align: center; font-weight: 500; background: none; border: none; white-space: nowrap; }
+.heat-table .row-label { font-size: 10px; color: var(--text); font-weight: 500; text-align: right; padding-right: 8px; white-space: nowrap; border: none; background: none; }
+.heat-cell { width: 34px; height: 28px; border-radius: 5px; text-align: center; font-size: 10px; font-weight: 600; cursor: default; transition: opacity .15s; }
+.hc-on { background: #2563eb; color: #fff; }
+.hc-off { background: #f1f4f9; color: transparent; }
+.hc-none { background: #fef2f2; color: #dc2626; font-size: 9px; }
+
+/* Alert cards */
+.alert-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px; }
+.alert-card { border-radius: var(--radius); padding: 14px 16px; border: 1px solid; }
+.ac-red { background: var(--red-light); border-color: #fca5a5; }
+.ac-amber { background: var(--amber-light); border-color: #fcd34d; }
+.ac-blue { background: var(--blue-light); border-color: #93c5fd; }
+.ac-title { font-size: 11px; font-weight: 600; margin-bottom: 6px; display: flex; align-items: center; gap: 5px; }
+.ac-red .ac-title { color: var(--red); }
+.ac-amber .ac-title { color: var(--amber); }
+.ac-blue .ac-title { color: var(--blue); }
+.ac-body { font-size: 10px; line-height: 1.8; }
+.ac-red .ac-body { color: #b91c1c; }
+.ac-amber .ac-body { color: #92400e; }
+.ac-blue .ac-body { color: #1d4ed8; }
+
+/* prog tags */
+.prog-tag { display: inline-block; font-size: 10px; background: var(--surface2); border-radius: 4px; padding: 2px 6px; margin: 2px; color: var(--text); }
+.legend { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 10px; font-size: 11px; color: var(--text2); }
+.ld { width: 10px; height: 10px; border-radius: 2px; display: inline-block; margin-right: 4px; vertical-align: middle; }
+
+/* Footer */
+.footer { text-align: center; padding: 20px; font-size: 11px; color: var(--text3); border-top: 1px solid var(--border); margin-top: 20px; }
+
+@media (max-width: 768px) {
+  .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+  .row2 { grid-template-columns: 1fr; }
+  .alert-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-left">
+    <div class="header-logo"><i class="ti ti-shield-check"></i></div>
+    <div>
+      <div class="header-title">산단 연구원 부서별 공통권한 현황</div>
+      <div class="header-sub">단국대학교 디지털정보원 정보기획팀</div>
+    </div>
+  </div>
+  <span class="header-badge">기준일 2026.06.01</span>
+</div>
+
+<div class="container">
+  <div class="page-title">4대보험 연구원 부서별 공통권한 부여 현황</div>
+  <div class="page-sub">사업단 간 공통 사용 프로그램 파악 및 팀장 권한 부여 지원 대시보드</div>
+
+  <!-- KPI -->
+  <div class="kpi-grid">
+    <div class="kpi">
+      <div class="kpi-label">공통권한 대상 프로그램</div>
+      <div class="kpi-value" style="color:var(--blue)">17<span style="font-size:14px;font-weight:400">개</span></div>
+      <div class="kpi-sub">2개 이상 사업단 공통 사용</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">사업단 특화 프로그램</div>
+      <div class="kpi-value" style="color:var(--purple)">40<span style="font-size:14px;font-weight:400">개</span></div>
+      <div class="kpi-sub">1개 사업단만 사용 — 별도 관리</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">권한 부여 대상 연구원</div>
+      <div class="kpi-value">76<span style="font-size:14px;font-weight:400">명</span></div>
+      <div class="kpi-sub">활성 기타소속 (만료임박 10명 포함)</div>
+    </div>
+    <div class="kpi warn">
+      <div class="kpi-label"><i class="ti ti-alert-triangle" style="font-size:12px"></i> 권한 미확인 사업단</div>
+      <div class="kpi-value">3<span style="font-size:14px;font-weight:400">개</span></div>
+      <div class="kpi-sub">글로벌K·반도체소부장·차세대디스플레이 (27명)</div>
+    </div>
+  </div>
+
+  <!-- 차트 2개 -->
+  <div class="row2">
+    <div class="card">
+      <div class="card-title"><i class="ti ti-chart-donut" style="color:var(--blue)"></i> 공통권한 업무영역별 구성</div>
+      <div class="legend">
+        <span><span class="ld" style="background:#7c3aed"></span>공유사업학사관리 9개</span>
+        <span><span class="ld" style="background:#059669"></span>수업관리 4개</span>
+        <span><span class="ld" style="background:#d97706"></span>인사 2개</span>
+        <span><span class="ld" style="background:#2563eb"></span>기타 2개</span>
+      </div>
+      <div style="position:relative;height:180px"><canvas id="bizChart" role="img" aria-label="공통 프로그램 업무영역 분포"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="card-title"><i class="ti ti-chart-bar" style="color:var(--blue)"></i> 사업단별 공통 vs 특화 프로그램</div>
+      <div class="legend">
+        <span><span class="ld" style="background:#2563eb"></span>공통</span>
+        <span><span class="ld" style="background:#a78bfa"></span>특화</span>
+      </div>
+      <div style="position:relative;height:190px"><canvas id="stackChart" role="img" aria-label="사업단별 공통/특화"></canvas></div>
+    </div>
+  </div>
+
+  <!-- 히트맵 -->
+  <div class="sec-label">공통권한 17개 — 사업단 × 프로그램 적용 현황</div>
+  <div class="full-card">
+    <div class="legend" style="margin-bottom:12px">
+      <span><span class="ld" style="background:#2563eb"></span>공통권한 해당</span>
+      <span><span class="ld" style="background:#f1f4f9"></span>미해당</span>
+      <span><span class="ld" style="background:#fef2f2"></span>미확인(권한 데이터 없음)</span>
+    </div>
+    <div class="heat-wrap">
+      <table class="heat-table" id="heatTable"></table>
+    </div>
+  </div>
+
+  <!-- 공통 프로그램 목록 -->
+  <div class="sec-label">공통권한 프로그램 목록 (17개) — 부서별 공통권한부여 화면 설정 대상</div>
+  <div class="full-card">
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr>
+          <th style="width:36px">No</th>
+          <th>프로그램명</th>
+          <th>업무영역</th>
+          <th style="width:80px;text-align:center">사업단 수</th>
+          <th>적용 사업단</th>
+        </tr></thead>
+        <tbody id="commonTbl"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 특화 프로그램 -->
+  <div class="sec-label">사업단 특화(추가) 프로그램 — 사업단 담당자 확인용</div>
+  <div class="full-card">
+    <div class="tab-bar" id="uniqueTabs"></div>
+    <div id="uniqueTable"></div>
+  </div>
+
+  <!-- 사업단별 현황 요약 -->
+  <div class="sec-label">사업단별 현황 요약</div>
+  <div class="full-card">
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr>
+          <th>사업단</th>
+          <th style="text-align:center">기타소속 인원</th>
+          <th style="text-align:center">전체 프로그램</th>
+          <th style="text-align:center">공통권한 해당</th>
+          <th style="text-align:center">특화 프로그램</th>
+          <th>비고</th>
+        </tr></thead>
+        <tbody id="summaryTbl"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 긴급 조치 -->
+  <div class="sec-label">긴급 조치 필요 사항</div>
+  <div class="alert-grid">
+    <div class="alert-card ac-red">
+      <div class="ac-title"><i class="ti ti-clock"></i> 기타소속 만료 임박 D-29</div>
+      <div class="ac-body">홍지나 (G-RISE)<br>모인순 (반도체소부장·전문인력)<br>최근용·문아현·김준엽·이건묵·김진경 (C-RISE)<br>강전용·이주애 (차세대디스플레이)<br><br>→ 갱신 또는 권한 회수 처리 필요</div>
+    </div>
+    <div class="alert-card ac-amber">
+      <div class="ac-title"><i class="ti ti-alert-triangle"></i> 권한 미확인 사업단 (27명)</div>
+      <div class="ac-body">글로벌K-컬처선도융합 (4명)<br>반도체소부장혁신융합 (6명)<br>차세대디스플레이혁신융합 (17명)<br><br>→ 기타소속 인원 존재하나 권한 데이터 없음<br>→ 공통권한 포함 여부 즉시 확인 필요</div>
+    </div>
+    <div class="alert-card ac-blue">
+      <div class="ac-title"><i class="ti ti-list-check"></i> 반도체전문인력 요청서 미제출</div>
+      <div class="ac-body">프로그램 요청서 미제출 상태<br>현재 14개 권한 보유 (공통 6 + 특화 8)<br><br>→ 특화 8개 실수요 확인 및 공식화<br>→ 담당자 요청서 제출 안내 필요</div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">단국대학교 디지털정보원 정보기획팀 · 2026.06.01 기준 · Leejongku/auth_for_np_RA</div>
+
+<script>
+const COMMON_PROGS = [
+  { prog:'자가진단시뮬레이션', biz:'졸업관리', cnt:4, orgs:['SW중심대학','바이오헬스혁신','반도체전문인력','사회구조변화'] },
+  { prog:'강의시간표 조회', biz:'수업관리', cnt:4, orgs:['SW중심대학','바이오헬스혁신','반도체전문인력','사회구조변화'] },
+  { prog:'강좌별 수강신청인원 현황(SMS)', biz:'수업관리', cnt:3, orgs:['SW중심대학','단국G-RISE','반도체전문인력'] },
+  { prog:'학적기본조회', biz:'학적관리', cnt:3, orgs:['SW중심대학','바이오헬스혁신','반도체전문인력'] },
+  { prog:'과목시간표 조회', biz:'수업관리', cnt:3, orgs:['SW중심대학','반도체전문인력','사회구조변화'] },
+  { prog:'전공신청업로드', biz:'공유사업학사관리', cnt:3, orgs:['단국C-RISE','바이오헬스혁신','사회구조변화'] },
+  { prog:'마이크로전공자가진단', biz:'공유사업학사관리', cnt:3, orgs:['단국C-RISE','바이오헬스혁신','사회구조변화'] },
+  { prog:'수강신청학점관리', biz:'공유사업학사관리', cnt:3, orgs:['단국C-RISE','바이오헬스혁신','사회구조변화'] },
+  { prog:'성적업로드', biz:'공유사업학사관리', cnt:3, orgs:['단국C-RISE','바이오헬스혁신','사회구조변화'] },
+  { prog:'학생관리', biz:'공유사업학사관리', cnt:3, orgs:['단국C-RISE','바이오헬스혁신','사회구조변화'] },
+  { prog:'자가진단용 전공관리', biz:'공유사업학사관리', cnt:3, orgs:['단국C-RISE','바이오헬스혁신','사회구조변화'] },
+  { prog:'수강신청대상자업로드', biz:'공유사업학사관리', cnt:3, orgs:['단국C-RISE','바이오헬스혁신','사회구조변화'] },
+  { prog:'수강신청대상자관리', biz:'공유사업학사관리', cnt:3, orgs:['단국C-RISE','바이오헬스혁신','사회구조변화'] },
+  { prog:'출장/여행신청', biz:'인사', cnt:2, orgs:['SW중심대학','바이오헬스혁신'] },
+  { prog:'출장/여행현황', biz:'인사', cnt:2, orgs:['SW중심대학','바이오헬스혁신'] },
+  { prog:'성적이관내역조회', biz:'공유사업학사관리', cnt:2, orgs:['단국C-RISE','사회구조변화'] },
+  { prog:'교육과정 관리', biz:'수업관리', cnt:2, orgs:['반도체전문인력','사회구조변화'] },
+];
+
+const ORGS_9 = ['SW중심대학','단국C-RISE','단국G-RISE','바이오헬스혁신','반도체전문인력','사회구조변화','글로벌K-컬처','반도체소부장','차세대디스플레이'];
+const NO_DATA = ['글로벌K-컬처','반도체소부장','차세대디스플레이'];
+
+const BIZ_COLOR = { '공유사업학사관리':'#7c3aed','수업관리':'#059669','인사':'#d97706','졸업관리':'#0891b2','학적관리':'#2563eb' };
+
+const UNIQUE_DATA = {
+  'SW중심대학 (29개)': [
+    { biz:'연구비', progs:['연구비청구(연계카드)','연구비청구(연계카드외)','연구비청구승인','연구비청구현황','연구비가수금현황','연구비구매현황','사후정산등록','사후정산현황','회의비(식비)사전승인요청','회의비(식비)사전승인현황','이지바로전송현황','이지바로전송현황(연구원)','인건비마감','부가세수입지출현황관리'] },
+    { biz:'연구과제', progs:['퇴직금관리','인건비신청서출력','선지급현황(결의)'] },
+    { biz:'학적관리', progs:['재적생이동보고(대학)','학적대장관련조회','학적통계출력','학적통계조회'] },
+    { biz:'회계', progs:['공용카드관리','공용카드 사용자관리'] },
+    { biz:'급여', progs:['기타기관정보등록','기타기관급여정보'] },
+    { biz:'수업관리', progs:['교강사 기본사항 관리','출석부 발행'] },
+    { biz:'인사', progs:['출강승인/미신고자등록'] },
+    { biz:'채용관리', progs:['수요조사등록'] },
+  ],
+  '단국G-RISE (2개)': [
+    { biz:'학적관리', progs:['학적기본조회(행정팀)'] },
+    { biz:'수업관리', progs:['현장실습 대상자 관리'] },
+  ],
+  '반도체전문인력 (8개)': [
+    { biz:'수업관리', progs:['수강 일괄삭제(미등록자)','모듈/마이크로/트랙 교육과정관리'] },
+    { biz:'학적관리', progs:['학적조회(EXCEL)'] },
+    { biz:'졸업관리', progs:['조기졸업/학사학위취득유예관련조회'] },
+    { biz:'시스템', progs:['SMS전송','SMS전송(PUSH)'] },
+    { biz:'시설', progs:['시설물신청'] },
+    { biz:'대외관계', progs:['교류협약기관현황'] },
+  ],
+  '사회구조변화 (1개)': [
+    { biz:'수업관리', progs:['강의계획서관리'] },
+  ],
+};
+
+const SUMMARY = [
+  { short:'SW중심대학사업단', total:36, common:7, unique:29, members:6 },
+  { short:'단국C-RISE사업단', total:9, common:9, unique:0, members:17 },
+  { short:'바이오헬스혁신융합대학', total:13, common:13, unique:0, members:17 },
+  { short:'반도체전문인력양성사업단', total:14, common:6, unique:8, members:7 },
+  { short:'사회구조변화대응융합인재', total:14, common:13, unique:1, members:5 },
+  { short:'단국G-RISE사업단', total:3, common:1, unique:2, members:12 },
+  { short:'글로벌K-컬처선도융합인재', total:0, common:0, unique:0, members:4 },
+  { short:'반도체소부장혁신융합대학', total:0, common:0, unique:0, members:6 },
+  { short:'차세대디스플레이혁신융합대학', total:0, common:0, unique:0, members:17 },
+];
+
+// Charts
+new Chart(document.getElementById('bizChart'), {
+  type:'doughnut',
+  data:{ labels:['공유사업학사관리 9','수업관리 4','인사 2','졸업관리 1','학적관리 1'],
+    datasets:[{ data:[9,4,2,1,1], backgroundColor:['#7c3aed','#059669','#d97706','#0891b2','#2563eb'], borderWidth:0 }] },
+  options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{ display:false } } }
+});
+new Chart(document.getElementById('stackChart'), {
+  type:'bar',
+  data:{ labels:['SW중심대학','C-RISE','바이오헬스','반도체전문','사회구조변화','G-RISE'],
+    datasets:[
+      { label:'공통', data:[7,9,13,6,13,1], backgroundColor:'#2563eb', borderWidth:0, borderRadius:3 },
+      { label:'특화', data:[29,0,0,8,1,2], backgroundColor:'#a78bfa', borderWidth:0, borderRadius:3 },
+    ] },
+  options:{ responsive:true, maintainAspectRatio:false,
+    plugins:{ legend:{ display:false } },
+    scales:{ x:{ stacked:true, grid:{color:'rgba(0,0,0,.05)'}, ticks:{font:{size:9},maxRotation:20} },
+             y:{ stacked:true, grid:{color:'rgba(0,0,0,.05)'}, beginAtZero:true } } }
+});
+
+// Heatmap
+const ht = document.getElementById('heatTable');
+let hdr = '<thead><tr><th></th>';
+COMMON_PROGS.forEach(p => {
+  const short = p.prog.length > 8 ? p.prog.slice(0,8)+'…' : p.prog;
+  hdr += `<th title="${p.prog}">${short}</th>`;
+});
+hdr += '</tr></thead><tbody>';
+ht.innerHTML = hdr;
+ORGS_9.forEach(org => {
+  const noData = NO_DATA.includes(org);
+  let row = `<tr><td class="row-label">${org}</td>`;
+  COMMON_PROGS.forEach(p => {
+    const has = p.orgs.includes(org);
+    if(noData) row += `<td class="heat-cell hc-none" title="${org}: 미확인">?</td>`;
+    else if(has) row += `<td class="heat-cell hc-on" title="${org}: ${p.prog}">✓</td>`;
+    else row += `<td class="heat-cell hc-off"></td>`;
+  });
+  row += '</tr>';
+  ht.innerHTML += row;
+});
+ht.innerHTML += '</tbody>';
+
+// Common table
+const ct = document.getElementById('commonTbl');
+COMMON_PROGS.forEach((p,i) => {
+  const bc = BIZ_COLOR[p.biz]||'#888';
+  ct.innerHTML += `<tr>
+    <td style="text-align:center;font-weight:600;color:var(--text2)">${i+1}</td>
+    <td style="font-weight:600">${p.prog}</td>
+    <td><span class="badge" style="background:${bc}18;color:${bc}">${p.biz}</span></td>
+    <td style="text-align:center"><span class="badge b-blue">${p.cnt}개</span></td>
+    <td style="color:var(--text2);font-size:10px">${p.orgs.join(', ')}</td>
+  </tr>`;
+});
+
+// Summary table
+const st = document.getElementById('summaryTbl');
+SUMMARY.forEach(r => {
+  const noData = r.total === 0;
+  st.innerHTML += `<tr>
+    <td style="font-weight:600">${r.short}</td>
+    <td style="text-align:center">${r.members}명</td>
+    <td style="text-align:center">${noData ? '<span class="badge b-amber">미확인</span>' : r.total+'개'}</td>
+    <td style="text-align:center">${noData ? '<span class="badge b-amber">미확인</span>' : '<span class="badge b-blue">'+r.common+'개</span>'}</td>
+    <td style="text-align:center">${noData ? '—' : (r.unique>0?'<span class="badge b-purple">'+r.unique+'개</span>':'<span class="badge b-gray">없음</span>')}</td>
+    <td style="font-size:10px;color:var(--text2)">${noData ? '⚠ 권한 데이터 없음 — 즉시 확인 필요' : (r.unique>0 ? '특화 프로그램 별도 관리 필요' : '공통권한으로 전부 커버')}</td>
+  </tr>`;
+});
+
+// Unique tabs
+const uniqOrgs = Object.keys(UNIQUE_DATA);
+const tabBar = document.getElementById('uniqueTabs');
+function renderUnique(org) {
+  const data = UNIQUE_DATA[org];
+  let html = '<div class="tbl-wrap"><table><thead><tr><th style="width:100px">업무영역</th><th>프로그램 목록</th><th style="width:60px;text-align:center">개수</th></tr></thead><tbody>';
+  data.forEach(d => {
+    html += `<tr><td><span class="badge" style="background:${BIZ_COLOR[d.biz]||'#f1f4f9'}18;color:${BIZ_COLOR[d.biz]||'#888'}">${d.biz}</span></td>
+      <td>${d.progs.map(p=>`<span class="prog-tag">${p}</span>`).join('')}</td>
+      <td style="text-align:center"><span class="badge b-gray">${d.progs.length}개</span></td></tr>`;
+  });
+  html += '</tbody></table></div>';
+  document.getElementById('uniqueTable').innerHTML = html;
+}
+uniqOrgs.forEach((org,i) => {
+  const btn = document.createElement('button');
+  btn.className = 'tab'+(i===0?' on':'');
+  btn.textContent = org;
+  btn.onclick = () => { tabBar.querySelectorAll('.tab').forEach(b=>b.classList.remove('on')); btn.classList.add('on'); renderUnique(org); };
+  tabBar.appendChild(btn);
+});
+renderUnique(uniqOrgs[0]);
+</script>
+</body>
+</html>
