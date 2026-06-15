@@ -100,19 +100,47 @@ tr:hover td { background: var(--surface2); }
 .ac-red { background: var(--red-light); border-color: #fca5a5; }
 .ac-amber { background: var(--amber-light); border-color: #fcd34d; }
 .ac-blue { background: var(--blue-light); border-color: #93c5fd; }
+.ac-green { background: var(--green-light); border-color: #6ee7b7; }
 .ac-title { font-size: 11px; font-weight: 600; margin-bottom: 6px; display: flex; align-items: center; gap: 5px; }
 .ac-red .ac-title { color: var(--red); }
 .ac-amber .ac-title { color: var(--amber); }
 .ac-blue .ac-title { color: var(--blue); }
+.ac-green .ac-title { color: var(--green); }
 .ac-body { font-size: 10px; line-height: 1.8; }
 .ac-red .ac-body { color: #b91c1c; }
 .ac-amber .ac-body { color: #92400e; }
 .ac-blue .ac-body { color: #1d4ed8; }
+.ac-green .ac-body { color: #065f46; }
 
 /* prog tags */
 .prog-tag { display: inline-block; font-size: 10px; background: var(--surface2); border-radius: 4px; padding: 2px 6px; margin: 2px; color: var(--text); }
 .legend { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 10px; font-size: 11px; color: var(--text2); }
 .ld { width: 10px; height: 10px; border-radius: 2px; display: inline-block; margin-right: 4px; vertical-align: middle; }
+
+/* ── AS-IS / TO-BE 흐름도 ── */
+.flow-grid { display: grid; grid-template-columns: 1fr 60px 1fr; gap: 0; align-items: start; }
+.flow-col { }
+.flow-header { font-size: 11px; font-weight: 700; padding: 7px 14px; border-radius: 8px 8px 0 0; text-align: center; letter-spacing: .04em; }
+.flow-header.asis { background: #fef2f2; color: var(--red); border: 1px solid #fca5a5; border-bottom: none; }
+.flow-header.tobe { background: #ecfdf5; color: var(--green); border: 1px solid #6ee7b7; border-bottom: none; }
+.flow-body { border: 1px solid var(--border); border-radius: 0 0 8px 8px; padding: 14px; background: var(--surface); }
+.flow-step { display: flex; align-items: flex-start; gap: 10px; padding: 10px 0; border-bottom: 1px dashed var(--border); }
+.flow-step:last-child { border-bottom: none; padding-bottom: 0; }
+.flow-num { width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+.fn-red { background: #fef2f2; color: var(--red); border: 1px solid #fca5a5; }
+.fn-green { background: #ecfdf5; color: var(--green); border: 1px solid #6ee7b7; }
+.flow-step-title { font-size: 11px; font-weight: 600; margin-bottom: 3px; color: var(--text); }
+.flow-step-desc { font-size: 10px; color: var(--text2); line-height: 1.6; }
+.flow-step-desc .hi { color: var(--red); font-weight: 600; }
+.flow-step-desc .ok { color: var(--green); font-weight: 600; }
+.flow-arrow-col { display: flex; align-items: center; justify-content: center; padding-top: 48px; }
+.flow-arrow-icon { font-size: 28px; color: var(--blue); font-weight: 700; }
+.flow-problem { margin-top: 10px; padding: 8px 10px; background: #fef2f2; border-radius: 6px; border-left: 3px solid var(--red); }
+.flow-problem-title { font-size: 10px; font-weight: 700; color: var(--red); margin-bottom: 4px; }
+.flow-problem li { font-size: 10px; color: #b91c1c; line-height: 1.8; margin-left: 14px; }
+.flow-benefit { margin-top: 10px; padding: 8px 10px; background: #ecfdf5; border-radius: 6px; border-left: 3px solid var(--green); }
+.flow-benefit-title { font-size: 10px; font-weight: 700; color: var(--green); margin-bottom: 4px; }
+.flow-benefit li { font-size: 10px; color: #065f46; line-height: 1.8; margin-left: 14px; }
 
 /* Footer */
 .footer { text-align: center; padding: 20px; font-size: 11px; color: var(--text3); border-top: 1px solid var(--border); margin-top: 20px; }
@@ -121,6 +149,8 @@ tr:hover td { background: var(--surface2); }
   .kpi-grid { grid-template-columns: repeat(2, 1fr); }
   .row2 { grid-template-columns: 1fr; }
   .alert-grid { grid-template-columns: 1fr; }
+  .flow-grid { grid-template-columns: 1fr; }
+  .flow-arrow-col { display: none; }
 }
 </style>
 </head>
@@ -134,24 +164,24 @@ tr:hover td { background: var(--surface2); }
       <div class="header-sub">단국대학교 디지털정보원 정보기획팀</div>
     </div>
   </div>
-  <span class="header-badge">기준일 2026.06.01</span>
+  <span class="header-badge">기준일 2026.06.01 &nbsp;|&nbsp; 작성 2026.06.15</span>
 </div>
 
 <div class="container">
-  <div class="page-title">4대보험 연구원 부서별 공통권한 부여 현황</div>
-  <div class="page-sub">사업단 간 공통 사용 프로그램 파악 및 팀장 권한 부여 지원 대시보드</div>
+  <div class="page-title">4대보험 연구원 부서별 공통권한 부여 현황 및 개선 방안</div>
+  <div class="page-sub">현행 권한 부여 절차 문제점 파악 → 공통권한 일괄 설정으로 사업단 부담 경감 · 보안 강화</div>
 
   <!-- KPI -->
   <div class="kpi-grid">
     <div class="kpi">
       <div class="kpi-label">공통권한 대상 프로그램</div>
-      <div class="kpi-value" style="color:var(--blue)">17<span style="font-size:14px;font-weight:400">개</span></div>
-      <div class="kpi-sub">2개 이상 사업단 공통 사용</div>
+      <div class="kpi-value" style="color:var(--blue)">16<span style="font-size:14px;font-weight:400">개</span></div>
+      <div class="kpi-sub">2개 이상 사업단 공통 사용 확정</div>
     </div>
     <div class="kpi">
       <div class="kpi-label">사업단 특화 프로그램</div>
       <div class="kpi-value" style="color:var(--purple)">40<span style="font-size:14px;font-weight:400">개</span></div>
-      <div class="kpi-sub">1개 사업단만 사용 — 별도 관리</div>
+      <div class="kpi-sub">1개 사업단 사용 — 관리주체 별도 요청</div>
     </div>
     <div class="kpi">
       <div class="kpi-label">권한 부여 대상 연구원</div>
@@ -165,6 +195,107 @@ tr:hover td { background: var(--surface2); }
     </div>
   </div>
 
+  <!-- AS-IS / TO-BE 흐름도 -->
+  <div class="sec-label"><i class="ti ti-arrows-exchange" style="margin-right:5px"></i>현행(AS-IS) 문제점 및 개선(TO-BE) 방향</div>
+  <div class="full-card">
+    <div class="flow-grid">
+
+      <!-- AS-IS -->
+      <div class="flow-col">
+        <div class="flow-header asis">⚠ AS-IS — 현행 방식 (매번 반복)</div>
+        <div class="flow-body">
+          <div class="flow-step">
+            <div class="flow-num fn-red">1</div>
+            <div>
+              <div class="flow-step-title">새 사업단 발령 발생</div>
+              <div class="flow-step-desc">기타소속 연구원이 종합정보시스템 접속 시 <span class="hi">권한 없음</span> — 업무 불가 상태</div>
+            </div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-num fn-red">2</div>
+            <div>
+              <div class="flow-step-title">관리주체 부서에 프로그램별 권한 요청</div>
+              <div class="flow-step-desc">교무처 학사팀·혁신융합대학총괄 등 <span class="hi">부서별로 개별 요청</span> — 창구 분산, 처리 지연</div>
+            </div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-num fn-red">3</div>
+            <div>
+              <div class="flow-step-title">타부서 권한이양으로 프로그램 수령</div>
+              <div class="flow-step-desc">각 관리주체 부서가 <span class="hi">타부서 권한이양</span> 처리 — 사업단 팀장이 직접 처리</div>
+            </div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-num fn-red">4</div>
+            <div>
+              <div class="flow-step-title">팀장 → 부서내 보안관리 → 구성원 개별 부여</div>
+              <div class="flow-step-desc">이양받은 후 다시 팀장이 구성원 1명씩 수동 부여 — <span class="hi">이중 작업</span></div>
+            </div>
+          </div>
+          <div class="flow-problem">
+            <div class="flow-problem-title">📋 현행 문제점 4가지</div>
+            <ul>
+              <li>① 권한 이양 절차 이중 부담 (요청→이양→재부여)</li>
+              <li>② 소속 기반 권한 제한 — 이양받아도 조회 불가 사례</li>
+              <li>③ 추가 소속 권한은 정보기획팀에 또 별도 요청 필요</li>
+              <li>④ 일부 사업단 팀장·차장 계정 공유 → 보안 취약</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- 화살표 -->
+      <div class="flow-arrow-col">
+        <div class="flow-arrow-icon">→</div>
+      </div>
+
+      <!-- TO-BE -->
+      <div class="flow-col">
+        <div class="flow-header tobe">✅ TO-BE — 공통권한 일괄 설정 방식</div>
+        <div class="flow-body">
+          <div class="flow-step">
+            <div class="flow-num fn-green">1</div>
+            <div>
+              <div class="flow-step-title">새 사업단 발령 발생</div>
+              <div class="flow-step-desc">기타소속 연구원 발령 확인 — 기존과 동일</div>
+            </div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-num fn-green">2</div>
+            <div>
+              <div class="flow-step-title">정보기획팀 — 공통권한 16개 일괄 설정</div>
+              <div class="flow-step-desc"><span class="ok">부서별 공통권한부여 화면</span>에서 사업단에 16개 프로그램 한 번에 설정 — 사업단 요청 불필요</div>
+            </div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-num fn-green">3</div>
+            <div>
+              <div class="flow-step-title">팀장 → 부서내 보안관리 → 구성원 부여</div>
+              <div class="flow-step-desc">팀장이 기존 화면에서 그대로 부여 — <span class="ok">절차 단순화</span>, 권한 이양 불필요</div>
+            </div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-num fn-green">4</div>
+            <div>
+              <div class="flow-step-title">특화 프로그램만 관리주체 부서에 요청</div>
+              <div class="flow-step-desc">사업단 고유 업무 프로그램만 <span class="ok">필요한 경우에 한해</span> 별도 요청 — 요청 건수 대폭 감소</div>
+            </div>
+          </div>
+          <div class="flow-benefit">
+            <div class="flow-benefit-title">✅ 개선 효과</div>
+            <ul>
+              <li>① 신규 사업단도 즉시 공통 업무 시작 가능</li>
+              <li>② 유사 사업단 간 공통 프로그램 자동 공유</li>
+              <li>③ 계정 공유 필요 없음 → 보안 강화</li>
+              <li>④ 정보기획팀 개별 요청 처리 부담 감소</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /flow-grid -->
+  </div>
+
   <!-- 차트 2개 -->
   <div class="row2">
     <div class="card">
@@ -173,7 +304,7 @@ tr:hover td { background: var(--surface2); }
         <span><span class="ld" style="background:#7c3aed"></span>공유사업학사관리 9개</span>
         <span><span class="ld" style="background:#059669"></span>수업관리 4개</span>
         <span><span class="ld" style="background:#d97706"></span>인사 2개</span>
-        <span><span class="ld" style="background:#2563eb"></span>기타 2개</span>
+        <span><span class="ld" style="background:#2563eb"></span>기타 1개</span>
       </div>
       <div style="position:relative;height:180px"><canvas id="bizChart" role="img" aria-label="공통 프로그램 업무영역 분포"></canvas></div>
     </div>
@@ -188,7 +319,7 @@ tr:hover td { background: var(--surface2); }
   </div>
 
   <!-- 히트맵 -->
-  <div class="sec-label">공통권한 17개 — 사업단 × 프로그램 적용 현황</div>
+  <div class="sec-label">공통권한 16개 — 사업단 × 프로그램 적용 현황</div>
   <div class="full-card">
     <div class="legend" style="margin-bottom:12px">
       <span><span class="ld" style="background:#2563eb"></span>공통권한 해당</span>
@@ -201,7 +332,7 @@ tr:hover td { background: var(--surface2); }
   </div>
 
   <!-- 공통 프로그램 목록 -->
-  <div class="sec-label">공통권한 프로그램 목록 (17개) — 부서별 공통권한부여 화면 설정 대상</div>
+  <div class="sec-label">공통권한 프로그램 목록 (16개) — 부서별 공통권한부여 화면 설정 대상</div>
   <div class="full-card">
     <div class="tbl-wrap">
       <table>
@@ -209,6 +340,7 @@ tr:hover td { background: var(--surface2); }
           <th style="width:36px">No</th>
           <th>프로그램명</th>
           <th>업무영역</th>
+          <th>관리주체</th>
           <th style="width:80px;text-align:center">사업단 수</th>
           <th>적용 사업단</th>
         </tr></thead>
@@ -218,7 +350,7 @@ tr:hover td { background: var(--surface2); }
   </div>
 
   <!-- 특화 프로그램 -->
-  <div class="sec-label">사업단 특화(추가) 프로그램 — 사업단 담당자 확인용</div>
+  <div class="sec-label">사업단 특화(추가) 프로그램 — 관리주체 부서에 별도 요청 대상</div>
   <div class="full-card">
     <div class="tab-bar" id="uniqueTabs"></div>
     <div id="uniqueTable"></div>
@@ -243,10 +375,10 @@ tr:hover td { background: var(--surface2); }
   </div>
 
   <!-- 긴급 조치 -->
-  <div class="sec-label">긴급 조치 필요 사항</div>
+  <div class="sec-label">조치 필요 사항</div>
   <div class="alert-grid">
     <div class="alert-card ac-red">
-      <div class="ac-title"><i class="ti ti-clock"></i> 기타소속 만료 임박 D-29</div>
+      <div class="ac-title"><i class="ti ti-clock"></i> 기타소속 만료 임박 (D-14 이내)</div>
       <div class="ac-body">홍지나 (G-RISE)<br>모인순 (반도체소부장·전문인력)<br>최근용·문아현·김준엽·이건묵·김진경 (C-RISE)<br>강전용·이주애 (차세대디스플레이)<br><br>→ 갱신 또는 권한 회수 처리 필요</div>
     </div>
     <div class="alert-card ac-amber">
@@ -257,31 +389,39 @@ tr:hover td { background: var(--surface2); }
       <div class="ac-title"><i class="ti ti-list-check"></i> 반도체전문인력 요청서 미제출</div>
       <div class="ac-body">프로그램 요청서 미제출 상태<br>현재 14개 권한 보유 (공통 6 + 특화 8)<br><br>→ 특화 8개 실수요 확인 및 공식화<br>→ 담당자 요청서 제출 안내 필요</div>
     </div>
+    <div class="alert-card ac-green" style="grid-column:1/-1">
+      <div class="ac-title"><i class="ti ti-route"></i> 공통권한 설정 후 권한 부여 원칙 (TO-BE 적용 기준)</div>
+      <div class="ac-body" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:6px 20px;">
+        <span>가. 신분별 공통 프로그램 16개 → 정보기획팀 일괄 기본 설정</span>
+        <span>나. 추가 프로그램 → 관리주체 부서에 개별 요청 (담당자가 직접)</span>
+        <span>다. 팀장 직접 부여 원칙 — 계정 공유·권한위임 지양</span>
+        <span>라. 소속 추가 권한 → 정보기획팀에 별도 요청</span>
+      </div>
+    </div>
   </div>
 
 </div>
 
-<div class="footer">단국대학교 디지털정보원 정보기획팀 · 2026.06.01 기준 · Leejongku/auth_for_np_RA</div>
+<div class="footer">단국대학교 디지털정보원 정보기획팀 · 기준일 2026.06.01 · 작성 2026.06.15 · Leejongku/auth_for_np_RA</div>
 
 <script>
 const COMMON_PROGS = [
-  { prog:'자가진단시뮬레이션', biz:'졸업관리', cnt:4, orgs:['SW중심대학','바이오헬스혁신','반도체전문인력','사회구조변화'] },
-  { prog:'강의시간표 조회', biz:'수업관리', cnt:4, orgs:['SW중심대학','바이오헬스혁신','반도체전문인력','사회구조변화'] },
-  { prog:'강좌별 수강신청인원 현황(SMS)', biz:'수업관리', cnt:3, orgs:['SW중심대학','단국G-RISE','반도체전문인력'] },
-  { prog:'학적기본조회', biz:'학적관리', cnt:3, orgs:['SW중심대학','바이오헬스혁신','반도체전문인력'] },
-  { prog:'과목시간표 조회', biz:'수업관리', cnt:3, orgs:['SW중심대학','반도체전문인력','사회구조변화'] },
-  { prog:'전공신청업로드', biz:'공유사업학사관리', cnt:3, orgs:['단국C-RISE','바이오헬스혁신','사회구조변화'] },
-  { prog:'마이크로전공자가진단', biz:'공유사업학사관리', cnt:3, orgs:['단국C-RISE','바이오헬스혁신','사회구조변화'] },
-  { prog:'수강신청학점관리', biz:'공유사업학사관리', cnt:3, orgs:['단국C-RISE','바이오헬스혁신','사회구조변화'] },
-  { prog:'성적업로드', biz:'공유사업학사관리', cnt:3, orgs:['단국C-RISE','바이오헬스혁신','사회구조변화'] },
-  { prog:'학생관리', biz:'공유사업학사관리', cnt:3, orgs:['단국C-RISE','바이오헬스혁신','사회구조변화'] },
-  { prog:'자가진단용 전공관리', biz:'공유사업학사관리', cnt:3, orgs:['단국C-RISE','바이오헬스혁신','사회구조변화'] },
-  { prog:'수강신청대상자업로드', biz:'공유사업학사관리', cnt:3, orgs:['단국C-RISE','바이오헬스혁신','사회구조변화'] },
-  { prog:'수강신청대상자관리', biz:'공유사업학사관리', cnt:3, orgs:['단국C-RISE','바이오헬스혁신','사회구조변화'] },
-  { prog:'출장/여행신청', biz:'인사', cnt:2, orgs:['SW중심대학','바이오헬스혁신'] },
-  { prog:'출장/여행현황', biz:'인사', cnt:2, orgs:['SW중심대학','바이오헬스혁신'] },
-  { prog:'성적이관내역조회', biz:'공유사업학사관리', cnt:2, orgs:['단국C-RISE','사회구조변화'] },
-  { prog:'교육과정 관리', biz:'수업관리', cnt:2, orgs:['반도체전문인력','사회구조변화'] },
+  { prog:'자가진단시뮬레이션', biz:'졸업관리', mgr:'교무처 학사팀', cnt:4, orgs:['SW중심대학','바이오헬스혁신','반도체전문인력','사회구조변화'] },
+  { prog:'강의시간표 조회', biz:'수업관리', mgr:'교무처 학사팀', cnt:4, orgs:['SW중심대학','바이오헬스혁신','반도체전문인력','사회구조변화'] },
+  { prog:'강좌별 수강신청인원 현황(SMS)', biz:'수업관리', mgr:'교무처 학사팀', cnt:3, orgs:['SW중심대학','단국G-RISE','반도체전문인력'] },
+  { prog:'학적기본조회', biz:'학적관리', mgr:'교무처 학사팀', cnt:3, orgs:['SW중심대학','바이오헬스혁신','반도체전문인력'] },
+  { prog:'과목시간표 조회', biz:'수업관리', mgr:'교무처 학사팀', cnt:3, orgs:['SW중심대학','반도체전문인력','사회구조변화'] },
+  { prog:'전공신청업로드', biz:'공유사업학사관리', mgr:'혁신융합대학총괄 사업운영팀', cnt:3, orgs:['단국C-RISE','바이오헬스혁신','사회구조변화'] },
+  { prog:'마이크로전공자가진단', biz:'공유사업학사관리', mgr:'혁신융합대학총괄 사업운영팀', cnt:3, orgs:['단국C-RISE','바이오헬스혁신','사회구조변화'] },
+  { prog:'수강신청학점관리', biz:'공유사업학사관리', mgr:'혁신융합대학총괄 사업운영팀', cnt:3, orgs:['단국C-RISE','바이오헬스혁신','사회구조변화'] },
+  { prog:'성적업로드', biz:'공유사업학사관리', mgr:'혁신융합대학총괄 사업운영팀', cnt:3, orgs:['단국C-RISE','바이오헬스혁신','사회구조변화'] },
+  { prog:'학생관리', biz:'공유사업학사관리', mgr:'혁신융합대학총괄 사업운영팀', cnt:3, orgs:['단국C-RISE','바이오헬스혁신','사회구조변화'] },
+  { prog:'자가진단용 전공관리', biz:'공유사업학사관리', mgr:'혁신융합대학총괄 사업운영팀', cnt:3, orgs:['단국C-RISE','바이오헬스혁신','사회구조변화'] },
+  { prog:'수강신청대상자업로드', biz:'공유사업학사관리', mgr:'혁신융합대학총괄 사업운영팀', cnt:3, orgs:['단국C-RISE','바이오헬스혁신','사회구조변화'] },
+  { prog:'수강신청대상자관리', biz:'공유사업학사관리', mgr:'혁신융합대학총괄 사업운영팀', cnt:3, orgs:['단국C-RISE','바이오헬스혁신','사회구조변화'] },
+  { prog:'출장/여행신청', biz:'인사', mgr:'총무인사처', cnt:2, orgs:['SW중심대학','바이오헬스혁신'] },
+  { prog:'출장/여행현황', biz:'인사', mgr:'총무인사처', cnt:2, orgs:['SW중심대학','바이오헬스혁신'] },
+  { prog:'현장실습 대상자 관리', biz:'수업관리', mgr:'취창업지원팀', cnt:2, orgs:['단국G-RISE','사회구조변화'] },
 ];
 
 const ORGS_9 = ['SW중심대학','단국C-RISE','단국G-RISE','바이오헬스혁신','반도체전문인력','사회구조변화','글로벌K-컬처','반도체소부장','차세대디스플레이'];
@@ -300,10 +440,6 @@ const UNIQUE_DATA = {
     { biz:'인사', progs:['출강승인/미신고자등록'] },
     { biz:'채용관리', progs:['수요조사등록'] },
   ],
-  '단국G-RISE (2개)': [
-    { biz:'학적관리', progs:['학적기본조회(행정팀)'] },
-    { biz:'수업관리', progs:['현장실습 대상자 관리'] },
-  ],
   '반도체전문인력 (8개)': [
     { biz:'수업관리', progs:['수강 일괄삭제(미등록자)','모듈/마이크로/트랙 교육과정관리'] },
     { biz:'학적관리', progs:['학적조회(EXCEL)'] },
@@ -311,6 +447,9 @@ const UNIQUE_DATA = {
     { biz:'시스템', progs:['SMS전송','SMS전송(PUSH)'] },
     { biz:'시설', progs:['시설물신청'] },
     { biz:'대외관계', progs:['교류협약기관현황'] },
+  ],
+  '단국G-RISE (1개)': [
+    { biz:'학적관리', progs:['학적기본조회(행정팀)'] },
   ],
   '사회구조변화 (1개)': [
     { biz:'수업관리', progs:['강의계획서관리'] },
@@ -323,7 +462,7 @@ const SUMMARY = [
   { short:'바이오헬스혁신융합대학', total:13, common:13, unique:0, members:17 },
   { short:'반도체전문인력양성사업단', total:14, common:6, unique:8, members:7 },
   { short:'사회구조변화대응융합인재', total:14, common:13, unique:1, members:5 },
-  { short:'단국G-RISE사업단', total:3, common:1, unique:2, members:12 },
+  { short:'단국G-RISE사업단', total:3, common:2, unique:1, members:12 },
   { short:'글로벌K-컬처선도융합인재', total:0, common:0, unique:0, members:4 },
   { short:'반도체소부장혁신융합대학', total:0, common:0, unique:0, members:6 },
   { short:'차세대디스플레이혁신융합대학', total:0, common:0, unique:0, members:17 },
@@ -332,16 +471,16 @@ const SUMMARY = [
 // Charts
 new Chart(document.getElementById('bizChart'), {
   type:'doughnut',
-  data:{ labels:['공유사업학사관리 9','수업관리 4','인사 2','졸업관리 1','학적관리 1'],
-    datasets:[{ data:[9,4,2,1,1], backgroundColor:['#7c3aed','#059669','#d97706','#0891b2','#2563eb'], borderWidth:0 }] },
+  data:{ labels:['공유사업학사관리 9','수업관리 4','인사 2','학적관리 1'],
+    datasets:[{ data:[9,4,2,1], backgroundColor:['#7c3aed','#059669','#d97706','#2563eb'], borderWidth:0 }] },
   options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{ display:false } } }
 });
 new Chart(document.getElementById('stackChart'), {
   type:'bar',
   data:{ labels:['SW중심대학','C-RISE','바이오헬스','반도체전문','사회구조변화','G-RISE'],
     datasets:[
-      { label:'공통', data:[7,9,13,6,13,1], backgroundColor:'#2563eb', borderWidth:0, borderRadius:3 },
-      { label:'특화', data:[29,0,0,8,1,2], backgroundColor:'#a78bfa', borderWidth:0, borderRadius:3 },
+      { label:'공통', data:[7,9,13,6,13,2], backgroundColor:'#2563eb', borderWidth:0, borderRadius:3 },
+      { label:'특화', data:[29,0,0,8,1,1], backgroundColor:'#a78bfa', borderWidth:0, borderRadius:3 },
     ] },
   options:{ responsive:true, maintainAspectRatio:false,
     plugins:{ legend:{ display:false } },
@@ -380,6 +519,7 @@ COMMON_PROGS.forEach((p,i) => {
     <td style="text-align:center;font-weight:600;color:var(--text2)">${i+1}</td>
     <td style="font-weight:600">${p.prog}</td>
     <td><span class="badge" style="background:${bc}18;color:${bc}">${p.biz}</span></td>
+    <td style="font-size:10px;color:var(--text2)">${p.mgr}</td>
     <td style="text-align:center"><span class="badge b-blue">${p.cnt}개</span></td>
     <td style="color:var(--text2);font-size:10px">${p.orgs.join(', ')}</td>
   </tr>`;
@@ -395,7 +535,7 @@ SUMMARY.forEach(r => {
     <td style="text-align:center">${noData ? '<span class="badge b-amber">미확인</span>' : r.total+'개'}</td>
     <td style="text-align:center">${noData ? '<span class="badge b-amber">미확인</span>' : '<span class="badge b-blue">'+r.common+'개</span>'}</td>
     <td style="text-align:center">${noData ? '—' : (r.unique>0?'<span class="badge b-purple">'+r.unique+'개</span>':'<span class="badge b-gray">없음</span>')}</td>
-    <td style="font-size:10px;color:var(--text2)">${noData ? '⚠ 권한 데이터 없음 — 즉시 확인 필요' : (r.unique>0 ? '특화 프로그램 별도 관리 필요' : '공통권한으로 전부 커버')}</td>
+    <td style="font-size:10px;color:var(--text2)">${noData ? '⚠ 권한 데이터 없음 — 즉시 확인 필요' : (r.unique>0 ? '특화 프로그램 관리주체 부서에 별도 요청' : '공통권한으로 전부 커버')}</td>
   </tr>`;
 });
 
