@@ -58,7 +58,8 @@ body { font-family: 'Malgun Gothic', '맑은 고딕', -apple-system, sans-serif;
 .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 16px; }
 .card-title { font-size: 13px; font-weight: 600; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
 .full-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 16px; margin-bottom: 16px; }
-.sec-label { font-size: 11px; font-weight: 600; color: var(--text2); letter-spacing: .05em; padding-bottom: 8px; border-bottom: 1px solid var(--border); margin: 20px 0 14px; text-transform: none; }
+.sec-label { font-size: 15px; font-weight: 700; color: var(--text); letter-spacing: 0; padding: 10px 0 10px; border-bottom: 2px solid var(--blue); margin: 28px 0 16px; display: flex; align-items: center; gap: 10px; }
+.sec-num { display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; border-radius: 50%; background: var(--blue); color: #fff; font-size: 13px; font-weight: 700; flex-shrink: 0; }
 
 /* Tabs */
 .tab-bar { display: flex; gap: 6px; margin-bottom: 14px; flex-wrap: wrap; }
@@ -195,7 +196,7 @@ tr:hover td { background: var(--surface2); }
   </div>
 
   <!-- 1. 조사한 사업단 목록 -->
-  <div class="sec-label">조사 대상 사업단 현황</div>
+  <div class="sec-label"><span class="sec-num">1</span> 조사 대상 사업단 현황</div>
   <div class="full-card">
     <div class="tbl-wrap">
       <table>
@@ -223,7 +224,7 @@ tr:hover td { background: var(--surface2); }
   </div>
 
   <!-- 2. AS-IS / TO-BE 흐름도 -->
-  <div class="sec-label"><i class="ti ti-arrows-exchange" style="margin-right:5px"></i>현행(AS-IS) 문제점 및 개선(TO-BE) 방향</div>
+  <div class="sec-label"><span class="sec-num">2</span> <i class="ti ti-arrows-exchange"></i> 현행(AS-IS) 문제점 및 개선(TO-BE) 방향</div>
   <div class="full-card">
     <div class="flow-grid">
 
@@ -324,7 +325,7 @@ tr:hover td { background: var(--surface2); }
   </div>
 
   <!-- 3. 권한 부여 화면 안내 -->
-  <div class="sec-label">권한 부여 화면 안내 — 실제 시스템 화면 구성</div>
+  <div class="sec-label"><span class="sec-num">3</span> 권한 부여 화면 안내 — 실제 시스템 화면 구성</div>
   <div class="full-card" style="padding:0;overflow:hidden">
     <div style="display:flex;border-bottom:1px solid var(--border);background:var(--surface2)">
       <button id="scr-tab1" onclick="switchScr(1)" style="padding:10px 20px;font-size:12px;font-weight:600;border:none;border-bottom:2px solid var(--blue);background:transparent;color:var(--blue);cursor:pointer">
@@ -458,7 +459,7 @@ tr:hover td { background: var(--surface2); }
   </div>
 
   <!-- 4. 히트맵 -->
-  <div class="sec-label">공통권한 16개 — 사업단 × 프로그램 적용 현황</div>
+  <div class="sec-label"><span class="sec-num">4</span> 사업단 × 프로그램 적용 현황 (공통권한 16개)</div>
   <div class="full-card">
     <div class="legend" style="margin-bottom:12px">
       <span><span class="ld" style="background:#2563eb"></span>공통권한 해당</span>
@@ -471,7 +472,7 @@ tr:hover td { background: var(--surface2); }
   </div>
 
   <!-- 공통 프로그램 목록 -->
-  <div class="sec-label">공통권한 프로그램 목록 (16개) — 부서별 공통권한부여 화면 설정 대상</div>
+  <div class="sec-label"><span class="sec-num">5</span> 공통권한 프로그램 목록 (16개) — 부서별 공통권한부여 화면 설정 대상</div>
   <div class="full-card">
     <div class="tbl-wrap">
       <table>
@@ -489,14 +490,14 @@ tr:hover td { background: var(--surface2); }
   </div>
 
   <!-- 특화 프로그램 -->
-  <div class="sec-label">사업단 특화(추가) 프로그램 — 관리주체 부서에 별도 요청 대상</div>
+  <div class="sec-label"><span class="sec-num">6</span> 사업단 특화(추가) 프로그램 — 관리주체 부서에 별도 요청 대상</div>
   <div class="full-card">
     <div class="tab-bar" id="uniqueTabs"></div>
     <div id="uniqueTable"></div>
   </div>
 
   <!-- 사업단별 현황 요약 -->
-  <div class="sec-label">사업단별 현황 요약</div>
+  <div class="sec-label"><span class="sec-num">7</span> 사업단별 현황 요약</div>
   <div class="full-card">
     <div class="tbl-wrap">
       <table>
