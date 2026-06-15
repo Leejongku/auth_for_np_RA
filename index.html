@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>산단 연구원 부서별 공통권한 현황</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <style>
 :root {
   --bg: #f8f9fb;
@@ -195,7 +194,35 @@ tr:hover td { background: var(--surface2); }
     </div>
   </div>
 
-  <!-- AS-IS / TO-BE 흐름도 -->
+  <!-- 1. 조사한 사업단 목록 -->
+  <div class="sec-label">조사 대상 사업단 현황</div>
+  <div class="full-card">
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr>
+          <th style="width:36px">No</th>
+          <th>사업단·센터명</th>
+          <th style="text-align:center">구분</th>
+          <th style="text-align:center">기타소속 인원</th>
+          <th style="text-align:center">권한 데이터</th>
+          <th>비고</th>
+        </tr></thead>
+        <tbody>
+          <tr><td style="text-align:center;color:var(--text2);font-weight:600">1</td><td style="font-weight:600">SW중심대학사업단</td><td style="text-align:center"><span class="badge b-blue">사업단</span></td><td style="text-align:center">6명</td><td style="text-align:center"><span class="badge b-green">확인</span></td><td style="font-size:11px;color:var(--text2)">공통 7 + 특화 29</td></tr>
+          <tr><td style="text-align:center;color:var(--text2);font-weight:600">2</td><td style="font-weight:600">단국C-RISE사업단</td><td style="text-align:center"><span class="badge b-blue">사업단</span></td><td style="text-align:center">17명</td><td style="text-align:center"><span class="badge b-green">확인</span></td><td style="font-size:11px;color:var(--text2)">공통 9개로 전부 커버</td></tr>
+          <tr><td style="text-align:center;color:var(--text2);font-weight:600">3</td><td style="font-weight:600">단국G-RISE사업단</td><td style="text-align:center"><span class="badge b-blue">사업단</span></td><td style="text-align:center">12명</td><td style="text-align:center"><span class="badge b-green">확인</span></td><td style="font-size:11px;color:var(--text2)">공통 2 + 특화 1</td></tr>
+          <tr><td style="text-align:center;color:var(--text2);font-weight:600">4</td><td style="font-weight:600">바이오헬스혁신융합대학</td><td style="text-align:center"><span class="badge b-blue">사업단</span></td><td style="text-align:center">17명</td><td style="text-align:center"><span class="badge b-green">확인</span></td><td style="font-size:11px;color:var(--text2)">공통 13개로 전부 커버</td></tr>
+          <tr><td style="text-align:center;color:var(--text2);font-weight:600">5</td><td style="font-weight:600">반도체전문인력양성사업단</td><td style="text-align:center"><span class="badge b-blue">사업단</span></td><td style="text-align:center">7명</td><td style="text-align:center"><span class="badge b-amber">요청서 미제출</span></td><td style="font-size:11px;color:var(--text2)">공통 6 + 특화 8 (실수요 확인 필요)</td></tr>
+          <tr><td style="text-align:center;color:var(--text2);font-weight:600">6</td><td style="font-weight:600">사회구조변화대응융합인재양성</td><td style="text-align:center"><span class="badge b-blue">사업단</span></td><td style="text-align:center">5명</td><td style="text-align:center"><span class="badge b-green">확인</span></td><td style="font-size:11px;color:var(--text2)">공통 13 + 특화 1</td></tr>
+          <tr><td style="text-align:center;color:var(--text2);font-weight:600">7</td><td style="font-weight:600">글로벌K-컬처선도융합인재양성</td><td style="text-align:center"><span class="badge b-blue">사업단</span></td><td style="text-align:center">4명</td><td style="text-align:center"><span class="badge b-red">미확인</span></td><td style="font-size:11px;color:var(--red)">권한 데이터 없음 — 즉시 확인 필요</td></tr>
+          <tr><td style="text-align:center;color:var(--text2);font-weight:600">8</td><td style="font-weight:600">반도체소부장혁신융합대학</td><td style="text-align:center"><span class="badge b-blue">사업단</span></td><td style="text-align:center">6명</td><td style="text-align:center"><span class="badge b-red">미확인</span></td><td style="font-size:11px;color:var(--red)">권한 데이터 없음 — 즉시 확인 필요</td></tr>
+          <tr><td style="text-align:center;color:var(--text2);font-weight:600">9</td><td style="font-weight:600">차세대디스플레이혁신융합대학</td><td style="text-align:center"><span class="badge b-blue">사업단</span></td><td style="text-align:center">17명</td><td style="text-align:center"><span class="badge b-red">미확인</span></td><td style="font-size:11px;color:var(--red)">권한 데이터 없음 — 즉시 확인 필요</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 2. AS-IS / TO-BE 흐름도 -->
   <div class="sec-label"><i class="ti ti-arrows-exchange" style="margin-right:5px"></i>현행(AS-IS) 문제점 및 개선(TO-BE) 방향</div>
   <div class="full-card">
     <div class="flow-grid">
@@ -296,29 +323,141 @@ tr:hover td { background: var(--surface2); }
     </div><!-- /flow-grid -->
   </div>
 
-  <!-- 차트 2개 -->
-  <div class="row2">
-    <div class="card">
-      <div class="card-title"><i class="ti ti-chart-donut" style="color:var(--blue)"></i> 공통권한 업무영역별 구성</div>
-      <div class="legend">
-        <span><span class="ld" style="background:#7c3aed"></span>공유사업학사관리 9개</span>
-        <span><span class="ld" style="background:#059669"></span>수업관리 4개</span>
-        <span><span class="ld" style="background:#d97706"></span>인사 2개</span>
-        <span><span class="ld" style="background:#2563eb"></span>기타 1개</span>
-      </div>
-      <div style="position:relative;height:180px"><canvas id="bizChart" role="img" aria-label="공통 프로그램 업무영역 분포"></canvas></div>
+  <!-- 3. 권한 부여 화면 안내 -->
+  <div class="sec-label">권한 부여 화면 안내 — 실제 시스템 화면 구성</div>
+  <div class="full-card" style="padding:0;overflow:hidden">
+    <div style="display:flex;border-bottom:1px solid var(--border);background:var(--surface2)">
+      <button id="scr-tab1" onclick="switchScr(1)" style="padding:10px 20px;font-size:12px;font-weight:600;border:none;border-bottom:2px solid var(--blue);background:transparent;color:var(--blue);cursor:pointer">
+        <i class="ti ti-circle-number-1"></i> 부서별 공통권한부여 (AUTH03002)
+      </button>
+      <button id="scr-tab2" onclick="switchScr(2)" style="padding:10px 20px;font-size:12px;font-weight:600;border:none;border-bottom:2px solid transparent;background:transparent;color:var(--text2);cursor:pointer">
+        <i class="ti ti-circle-number-2"></i> 부서내 보안관리 (AUTH03005)
+      </button>
     </div>
-    <div class="card">
-      <div class="card-title"><i class="ti ti-chart-bar" style="color:var(--blue)"></i> 사업단별 공통 vs 특화 프로그램</div>
-      <div class="legend">
-        <span><span class="ld" style="background:#2563eb"></span>공통</span>
-        <span><span class="ld" style="background:#a78bfa"></span>특화</span>
+    <!-- 화면1 -->
+    <div id="scr1" style="padding:16px">
+      <div style="font-size:11px;color:var(--text2);margin-bottom:10px">
+        <span style="background:var(--blue-light);color:var(--blue);padding:2px 8px;border-radius:20px;font-size:10px;font-weight:500">정보기획팀 사용</span>
+        &nbsp;신규 사업단 발령 시 공통권한 16개를 일괄 설정하는 화면입니다.
       </div>
-      <div style="position:relative;height:190px"><canvas id="stackChart" role="img" aria-label="사업단별 공통/특화"></canvas></div>
+      <div style="border:1px solid var(--border);border-radius:6px;overflow:hidden;font-size:11px">
+        <div style="background:var(--surface2);border-bottom:1px solid var(--border);padding:5px 10px;display:flex;align-items:center;justify-content:space-between">
+          <span style="font-weight:600;color:var(--blue)">● 부서별공통권한부여(SYST::AUTH03002)</span>
+          <span style="color:var(--text3);font-size:10px">↺ ☆ □ ×</span>
+        </div>
+        <div style="background:var(--surface2);border-bottom:1px solid var(--border);padding:5px 10px;display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+          <span style="font-size:10px;color:var(--text2)">◉ 화면유형</span><select style="font-size:10px;padding:2px 6px;border:1px solid var(--border);border-radius:3px"><option>종합정보</option></select>
+          <span style="font-size:10px;color:var(--text2)">◉ 권한유형</span><select style="font-size:10px;padding:2px 6px;border:1px solid var(--border);border-radius:3px"><option>공통권한</option></select>
+          <span style="font-size:10px;color:var(--text2)">○ 권한분류</span><select style="font-size:10px;padding:2px 6px;border:1px solid var(--border);border-radius:3px"><option>부서별개인권한</option></select>
+          <button style="font-size:10px;padding:2px 10px;background:var(--blue);color:#fff;border:none;border-radius:3px">Q 조회</button>
+        </div>
+        <div style="padding:8px;display:grid;grid-template-columns:1fr 1fr;gap:8px">
+          <div>
+            <div style="border:1px solid var(--border);border-radius:4px;overflow:hidden;margin-bottom:8px">
+              <div style="background:var(--surface2);border-bottom:1px solid var(--border);padding:4px 8px;display:flex;justify-content:space-between"><span style="font-weight:600;font-size:11px">■ 권한목록</span><span style="font-size:10px;color:var(--text2)">Count : 94</span></div>
+              <table style="width:100%;border-collapse:collapse;font-size:10px">
+                <thead><tr style="background:var(--surface2)"><th style="padding:4px 6px;border-bottom:1px solid var(--border);color:var(--text2)">순번</th><th style="padding:4px 6px;border-bottom:1px solid var(--border);color:var(--text2)">권한ID</th><th style="padding:4px 6px;border-bottom:1px solid var(--border);color:var(--text2)">권한명</th><th style="padding:4px 6px;border-bottom:1px solid var(--border);color:var(--text2)">권한유형</th></tr></thead>
+                <tbody>
+                  <tr><td style="padding:3px 6px;border-bottom:1px solid var(--border)">80</td><td style="padding:3px 6px;border-bottom:1px solid var(--border)">4123</td><td style="padding:3px 6px;border-bottom:1px solid var(--border)">학과련탐스등록[공통]</td><td style="padding:3px 6px;border-bottom:1px solid var(--border)"><span style="background:var(--blue-light);color:var(--blue);padding:1px 5px;border-radius:10px;font-size:9px">공통권한</span></td></tr>
+                  <tr><td style="padding:3px 6px;border-bottom:1px solid var(--border)">84</td><td style="padding:3px 6px;border-bottom:1px solid var(--border)">4461</td><td style="padding:3px 6px;border-bottom:1px solid var(--border)">연구실설정보관리[공통]</td><td style="padding:3px 6px;border-bottom:1px solid var(--border)"><span style="background:var(--blue-light);color:var(--blue);padding:1px 5px;border-radius:10px;font-size:9px">공통권한</span></td></tr>
+                  <tr style="background:#fef9c3"><td style="padding:3px 6px;color:#92400e;font-weight:600">94</td><td style="padding:3px 6px;color:#92400e">5037</td><td style="padding:3px 6px;color:#92400e;font-weight:600">사업단[공통] ◀ 선택</td><td style="padding:3px 6px"><span style="background:var(--blue-light);color:var(--blue);padding:1px 5px;border-radius:10px;font-size:9px">공통권한</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div style="border:1px solid var(--border);border-radius:4px;overflow:hidden">
+              <div style="background:var(--surface2);border-bottom:1px solid var(--border);padding:4px 8px;display:flex;justify-content:space-between"><span style="font-weight:600;font-size:11px">■ 부서목록</span><span style="font-size:10px;color:var(--text2)">Count : 1</span></div>
+              <table style="width:100%;border-collapse:collapse;font-size:10px">
+                <thead><tr style="background:var(--surface2)"><th style="padding:4px 6px;border-bottom:1px solid var(--border);color:var(--text2)">순번</th><th style="padding:4px 6px;border-bottom:1px solid var(--border);color:var(--text2)">조직코드</th><th style="padding:4px 6px;border-bottom:1px solid var(--border);color:var(--text2)">부서명</th></tr></thead>
+                <tbody><tr style="background:#fef9c3"><td style="padding:3px 6px;color:#92400e;font-weight:600">1</td><td style="padding:3px 6px;color:#92400e">2000006004</td><td style="padding:3px 6px;color:#92400e;font-weight:600">단국G-RISE사업단 사업지원팀</td></tr></tbody>
+              </table>
+            </div>
+          </div>
+          <div style="border:1px solid var(--border);border-radius:4px;overflow:hidden">
+            <div style="background:var(--surface2);border-bottom:1px solid var(--border);padding:4px 8px;display:flex;justify-content:space-between"><span style="font-weight:600;font-size:11px">■ 프로그램목록</span><span style="font-size:10px;color:var(--text2)">Count : 1</span></div>
+            <table style="width:100%;border-collapse:collapse;font-size:10px">
+              <thead><tr style="background:var(--surface2)"><th style="padding:4px 6px;border-bottom:1px solid var(--border);color:var(--text2)">순번</th><th style="padding:4px 6px;border-bottom:1px solid var(--border);color:var(--text2)">ID</th><th style="padding:4px 6px;border-bottom:1px solid var(--border);color:var(--text2);min-width:160px">프로그램명</th><th style="padding:4px 6px;border-bottom:1px solid var(--border);color:var(--text2)">조회</th><th style="padding:4px 6px;border-bottom:1px solid var(--border);color:var(--text2)">저장</th><th style="padding:4px 6px;border-bottom:1px solid var(--border);color:var(--text2)">출력</th></tr></thead>
+              <tbody><tr style="background:#fef9c3"><td style="padding:3px 6px;color:#92400e">1</td><td style="padding:3px 6px;color:#92400e">5069</td><td style="padding:3px 6px;color:#92400e">시스템>계정관리>단국가족조회</td><td style="padding:3px 6px;text-align:center">☑</td><td style="padding:3px 6px;text-align:center">☐</td><td style="padding:3px 6px;text-align:center">☐</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px">
+        <div style="background:var(--blue-light);border:1px solid #93c5fd;border-radius:8px;padding:10px 12px;font-size:11px;color:#1d4ed8"><div style="font-weight:600;margin-bottom:4px"><i class="ti ti-info-circle"></i> 이 화면의 역할</div>권한목록에서 <b>사업단[공통]</b> 선택 → 부서목록에서 <b>대상 사업단</b> 선택 → 우측에서 프로그램별 권한을 체크합니다.</div>
+        <div style="background:var(--green-light);border:1px solid #6ee7b7;border-radius:8px;padding:10px 12px;font-size:11px;color:#065f46"><div style="font-weight:600;margin-bottom:4px"><i class="ti ti-circle-check"></i> TO-BE 활용 방법</div>정보기획팀이 <b>신규 사업단 발령 시 1회</b>만 이 화면에서 공통권한 16개를 일괄 설정합니다. 사업단 팀장·담당자가 별도 요청할 필요가 없습니다.</div>
+      </div>
+    </div>
+    <!-- 화면2 -->
+    <div id="scr2" style="padding:16px;display:none">
+      <div style="font-size:11px;color:var(--text2);margin-bottom:10px">
+        <span style="background:var(--green-light);color:var(--green);padding:2px 8px;border-radius:20px;font-size:10px;font-weight:500">사업단 팀장 사용</span>
+        &nbsp;공통권한이 설정된 후, 팀장이 구성원에게 직접 권한을 부여하는 화면입니다.
+      </div>
+      <div style="border:1px solid var(--border);border-radius:6px;overflow:hidden;font-size:11px">
+        <div style="background:var(--surface2);border-bottom:1px solid var(--border);padding:5px 10px;display:flex;align-items:center;justify-content:space-between">
+          <span style="font-weight:600;color:var(--green)">● 부서내 보안관리(SYST::AUTH03005)</span>
+          <span style="color:var(--text3);font-size:10px">↺ ☆ □ ×</span>
+        </div>
+        <div style="background:var(--surface2);border-bottom:1px solid var(--border);padding:5px 10px;display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+          <span style="font-size:10px;color:var(--text2)">◉ 화면유형</span><select style="font-size:10px;padding:2px 6px;border:1px solid var(--border);border-radius:3px"><option>종합정보</option></select>
+          <span style="font-size:10px;color:var(--text2)">◉ 조직코드/명</span><input style="font-size:10px;padding:2px 6px;border:1px solid var(--border);border-radius:3px;width:80px" value="2000005679" readonly>
+          <span style="font-size:10px;color:var(--text2)">반도체소부장혁신융합대학사업단 사업지원팀</span>
+          <button style="font-size:10px;padding:2px 10px;background:var(--blue);color:#fff;border:none;border-radius:3px">Q 조회</button>
+        </div>
+        <div style="padding:8px;display:grid;grid-template-columns:240px 1fr;gap:8px">
+          <div>
+            <div style="border:1px solid var(--border);border-radius:4px;overflow:hidden;margin-bottom:8px">
+              <div style="background:var(--surface2);border-bottom:1px solid var(--border);padding:4px 8px;display:flex;justify-content:space-between"><span style="font-weight:600;font-size:11px">■ 권한목록</span><span style="font-size:10px;color:var(--text2)">Count : 3</span></div>
+              <table style="width:100%;border-collapse:collapse;font-size:10px">
+                <thead><tr style="background:var(--surface2)"><th style="padding:4px 6px;border-bottom:1px solid var(--border);color:var(--text2)">권한명</th><th style="padding:4px 6px;border-bottom:1px solid var(--border);color:var(--text2)">권한유형</th></tr></thead>
+                <tbody>
+                  <tr style="background:#fef9c3"><td style="padding:3px 6px;color:#92400e;font-weight:600">사업지원팀[최상위] ◀</td><td style="padding:3px 6px"><span style="background:var(--green-light);color:var(--green);padding:1px 5px;border-radius:10px;font-size:9px">관리권한</span></td></tr>
+                  <tr><td style="padding:3px 6px;border-top:1px solid var(--border)">채용레포트[공채]</td><td style="padding:3px 6px;border-top:1px solid var(--border)"><span style="background:var(--blue-light);color:var(--blue);padding:1px 5px;border-radius:10px;font-size:9px">공통권한</span></td></tr>
+                  <tr><td style="padding:3px 6px;border-top:1px solid var(--border)">채용레포트[특별교원]</td><td style="padding:3px 6px;border-top:1px solid var(--border)"><span style="background:var(--blue-light);color:var(--blue);padding:1px 5px;border-radius:10px;font-size:9px">공통권한</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div style="border:1px solid var(--border);border-radius:4px;overflow:hidden">
+              <div style="background:var(--surface2);border-bottom:1px solid var(--border);padding:4px 8px;display:flex;justify-content:space-between"><span style="font-weight:600;font-size:11px">■ 사용자목록</span><span style="font-size:10px;color:var(--text2)">Count : 5</span></div>
+              <table style="width:100%;border-collapse:collapse;font-size:10px">
+                <thead><tr style="background:var(--surface2)"><th style="padding:4px 6px;border-bottom:1px solid var(--border);color:var(--text2)">순번</th><th style="padding:4px 6px;border-bottom:1px solid var(--border);color:var(--text2)">재직</th><th style="padding:4px 6px;border-bottom:1px solid var(--border);color:var(--text2)">교번</th><th style="padding:4px 6px;border-bottom:1px solid var(--border);color:var(--text2)">성명</th><th style="padding:4px 6px;border-bottom:1px solid var(--border);color:var(--text2)">선택</th></tr></thead>
+                <tbody>
+                  <tr style="background:#fef9c3"><td style="padding:3px 6px;color:#92400e">1</td><td style="padding:3px 6px;color:#92400e">재직</td><td style="padding:3px 6px"><span style="display:inline-block;background:var(--border);border-radius:3px;width:52px;height:11px"></span></td><td style="padding:3px 6px"><span style="display:inline-block;background:var(--border);border-radius:3px;width:32px;height:11px"></span></td><td style="padding:3px 6px;text-align:center">☑</td></tr>
+                  <tr><td style="padding:3px 6px;border-top:1px solid var(--border)">2</td><td style="padding:3px 6px;border-top:1px solid var(--border)">재직</td><td style="padding:3px 6px;border-top:1px solid var(--border)"><span style="display:inline-block;background:var(--border);border-radius:3px;width:52px;height:11px"></span></td><td style="padding:3px 6px;border-top:1px solid var(--border)"><span style="display:inline-block;background:var(--border);border-radius:3px;width:32px;height:11px"></span></td><td style="padding:3px 6px;border-top:1px solid var(--border);text-align:center">☑</td></tr>
+                  <tr><td style="padding:3px 6px;border-top:1px solid var(--border)">3</td><td style="padding:3px 6px;border-top:1px solid var(--border)">재직</td><td style="padding:3px 6px;border-top:1px solid var(--border)"><span style="display:inline-block;background:var(--border);border-radius:3px;width:52px;height:11px"></span></td><td style="padding:3px 6px;border-top:1px solid var(--border)"><span style="display:inline-block;background:var(--border);border-radius:3px;width:32px;height:11px"></span></td><td style="padding:3px 6px;border-top:1px solid var(--border);text-align:center">☑</td></tr>
+                  <tr><td style="padding:3px 6px;border-top:1px solid var(--border)">4</td><td style="padding:3px 6px;border-top:1px solid var(--border)">재직</td><td style="padding:3px 6px;border-top:1px solid var(--border)"><span style="display:inline-block;background:var(--border);border-radius:3px;width:52px;height:11px"></span></td><td style="padding:3px 6px;border-top:1px solid var(--border)"><span style="display:inline-block;background:var(--border);border-radius:3px;width:32px;height:11px"></span></td><td style="padding:3px 6px;border-top:1px solid var(--border);text-align:center">☑</td></tr>
+                  <tr><td style="padding:3px 6px;border-top:1px solid var(--border)">5</td><td style="padding:3px 6px;border-top:1px solid var(--border)">재직</td><td style="padding:3px 6px;border-top:1px solid var(--border)"><span style="display:inline-block;background:var(--border);border-radius:3px;width:52px;height:11px"></span></td><td style="padding:3px 6px;border-top:1px solid var(--border)"><span style="display:inline-block;background:var(--border);border-radius:3px;width:32px;height:11px"></span></td><td style="padding:3px 6px;border-top:1px solid var(--border);text-align:center">☑</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div style="border:1px solid var(--border);border-radius:4px;overflow:hidden">
+            <div style="background:var(--surface2);border-bottom:1px solid var(--border);padding:4px 8px;display:flex;justify-content:space-between"><span style="font-weight:600;font-size:11px">■ 프로그램목록</span><span style="font-size:10px;color:var(--text2)">Count : 24</span></div>
+            <div style="overflow-x:auto">
+            <table style="width:100%;border-collapse:collapse;font-size:10px;min-width:560px">
+              <thead><tr style="background:var(--surface2)"><th style="padding:4px 6px;border-bottom:1px solid var(--border);color:var(--text2)">순번</th><th style="padding:4px 6px;border-bottom:1px solid var(--border);color:var(--text2)">ID</th><th style="padding:4px 6px;border-bottom:1px solid var(--border);color:var(--text2);min-width:200px">프로그램명</th><th style="padding:4px 6px;border-bottom:1px solid var(--border);color:var(--text2)">관리주체</th><th style="padding:4px 6px;border-bottom:1px solid var(--border);color:var(--text2)">조회</th><th style="padding:4px 6px;border-bottom:1px solid var(--border);color:var(--text2)">저장</th><th style="padding:4px 6px;border-bottom:1px solid var(--border);color:var(--text2)">출력</th><th style="padding:4px 6px;border-bottom:1px solid var(--border);color:var(--text2)">액셀</th></tr></thead>
+              <tbody>
+                <tr style="background:#fef9c3"><td style="padding:3px 6px;color:#92400e">1</td><td style="padding:3px 6px;color:#92400e">3147</td><td style="padding:3px 6px;color:#92400e">학사정보>학적관리>학적기본조회</td><td style="padding:3px 6px;font-size:9px;color:#1d4ed8">교무처 학사팀</td><td style="padding:3px 6px;text-align:center">☑</td><td style="padding:3px 6px;text-align:center">☐</td><td style="padding:3px 6px;text-align:center">☑</td><td style="padding:3px 6px;text-align:center">☑</td></tr>
+                <tr><td style="padding:3px 6px;border-top:1px solid var(--border)">2</td><td style="padding:3px 6px;border-top:1px solid var(--border)">5277</td><td style="padding:3px 6px;border-top:1px solid var(--border)">학사정보>학적관리>학적조회(EXCEL)</td><td style="padding:3px 6px;border-top:1px solid var(--border);font-size:9px;color:#1d4ed8">교무처 학사팀</td><td style="padding:3px 6px;border-top:1px solid var(--border);text-align:center">☑</td><td style="padding:3px 6px;border-top:1px solid var(--border);text-align:center">☐</td><td style="padding:3px 6px;border-top:1px solid var(--border);text-align:center">☑</td><td style="padding:3px 6px;border-top:1px solid var(--border);text-align:center">☑</td></tr>
+                <tr><td style="padding:3px 6px;border-top:1px solid var(--border)">5</td><td style="padding:3px 6px;border-top:1px solid var(--border)">3272</td><td style="padding:3px 6px;border-top:1px solid var(--border)">학사정보>졸업관리>자가진단시뮬레이션</td><td style="padding:3px 6px;border-top:1px solid var(--border);font-size:9px;color:#1d4ed8">교무처 학사팀</td><td style="padding:3px 6px;border-top:1px solid var(--border);text-align:center">☑</td><td style="padding:3px 6px;border-top:1px solid var(--border);text-align:center">☐</td><td style="padding:3px 6px;border-top:1px solid var(--border);text-align:center">☑</td><td style="padding:3px 6px;border-top:1px solid var(--border);text-align:center">☑</td></tr>
+                <tr><td style="padding:3px 6px;border-top:1px solid var(--border)">8</td><td style="padding:3px 6px;border-top:1px solid var(--border)">3326</td><td style="padding:3px 6px;border-top:1px solid var(--border)">학사정보>수업관리>강의시간표 조회</td><td style="padding:3px 6px;border-top:1px solid var(--border);font-size:9px;color:var(--text3)"></td><td style="padding:3px 6px;border-top:1px solid var(--border);text-align:center">☑</td><td style="padding:3px 6px;border-top:1px solid var(--border);text-align:center">☐</td><td style="padding:3px 6px;border-top:1px solid var(--border);text-align:center">☑</td><td style="padding:3px 6px;border-top:1px solid var(--border);text-align:center">☑</td></tr>
+                <tr><td style="padding:3px 6px;border-top:1px solid var(--border)">14</td><td style="padding:3px 6px;border-top:1px solid var(--border)">6811</td><td style="padding:3px 6px;border-top:1px solid var(--border)">공유사업학사관리>수강신청확정관리</td><td style="padding:3px 6px;border-top:1px solid var(--border);font-size:9px;color:#059669">혁신융합대학총괄</td><td style="padding:3px 6px;border-top:1px solid var(--border);text-align:center">☑</td><td style="padding:3px 6px;border-top:1px solid var(--border);text-align:center">☐</td><td style="padding:3px 6px;border-top:1px solid var(--border);text-align:center">☑</td><td style="padding:3px 6px;border-top:1px solid var(--border);text-align:center">☑</td></tr>
+                <tr><td style="padding:3px 6px;border-top:1px solid var(--border)">17</td><td style="padding:3px 6px;border-top:1px solid var(--border)">6807</td><td style="padding:3px 6px;border-top:1px solid var(--border)">공유사업학사관리>학생관리</td><td style="padding:3px 6px;border-top:1px solid var(--border);font-size:9px;color:#059669">혁신융합대학총괄</td><td style="padding:3px 6px;border-top:1px solid var(--border);text-align:center">☑</td><td style="padding:3px 6px;border-top:1px solid var(--border);text-align:center">☐</td><td style="padding:3px 6px;border-top:1px solid var(--border);text-align:center">☑</td><td style="padding:3px 6px;border-top:1px solid var(--border);text-align:center">☑</td></tr>
+                <tr><td style="padding:3px 6px;border-top:1px solid var(--border)">23</td><td style="padding:3px 6px;border-top:1px solid var(--border)">2797</td><td style="padding:3px 6px;border-top:1px solid var(--border)">시스템>SMS>SMS전송</td><td style="padding:3px 6px;border-top:1px solid var(--border);font-size:9px;color:var(--text2)">총무인사처</td><td style="padding:3px 6px;border-top:1px solid var(--border);text-align:center">☑</td><td style="padding:3px 6px;border-top:1px solid var(--border);text-align:center">☐</td><td style="padding:3px 6px;border-top:1px solid var(--border);text-align:center">☑</td><td style="padding:3px 6px;border-top:1px solid var(--border);text-align:center">☑</td></tr>
+              </tbody>
+            </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:10px">
+        <div style="background:var(--green-light);border:1px solid #6ee7b7;border-radius:8px;padding:10px 12px;font-size:11px;color:#065f46"><div style="font-weight:600;margin-bottom:4px"><i class="ti ti-info-circle"></i> 이 화면의 역할</div>권한목록 선택 → 사용자목록에서 구성원 선택 → 프로그램별 체크박스 설정 후 저장합니다.</div>
+        <div style="background:var(--amber-light);border:1px solid #fcd34d;border-radius:8px;padding:10px 12px;font-size:11px;color:#92400e"><div style="font-weight:600;margin-bottom:4px"><i class="ti ti-alert-triangle"></i> 현행 방식의 문제</div>공통권한 사전 설정이 없으면 프로그램을 요청·이양받은 후에야 이 화면에 나타납니다.</div>
+        <div style="background:var(--blue-light);border:1px solid #93c5fd;border-radius:8px;padding:10px 12px;font-size:11px;color:#1d4ed8"><div style="font-weight:600;margin-bottom:4px"><i class="ti ti-circle-check"></i> 개선 후</div>화면①에서 공통권한이 미리 설정되면, 팀장은 <b>구성원 선택 → 저장</b>만 하면 됩니다.</div>
+      </div>
     </div>
   </div>
 
-  <!-- 히트맵 -->
+  <!-- 4. 히트맵 -->
   <div class="sec-label">공통권한 16개 — 사업단 × 프로그램 적용 현황</div>
   <div class="full-card">
     <div class="legend" style="margin-bottom:12px">
@@ -374,35 +513,19 @@ tr:hover td { background: var(--surface2); }
     </div>
   </div>
 
-  <!-- 긴급 조치 -->
-  <div class="sec-label">조치 필요 사항</div>
-  <div class="alert-grid">
-    <div class="alert-card ac-red">
-      <div class="ac-title"><i class="ti ti-clock"></i> 기타소속 만료 임박 (D-14 이내)</div>
-      <div class="ac-body">홍지나 (G-RISE)<br>모인순 (반도체소부장·전문인력)<br>최근용·문아현·김준엽·이건묵·김진경 (C-RISE)<br>강전용·이주애 (차세대디스플레이)<br><br>→ 갱신 또는 권한 회수 처리 필요</div>
-    </div>
-    <div class="alert-card ac-amber">
-      <div class="ac-title"><i class="ti ti-alert-triangle"></i> 권한 미확인 사업단 (27명)</div>
-      <div class="ac-body">글로벌K-컬처선도융합 (4명)<br>반도체소부장혁신융합 (6명)<br>차세대디스플레이혁신융합 (17명)<br><br>→ 기타소속 인원 존재하나 권한 데이터 없음<br>→ 공통권한 포함 여부 즉시 확인 필요</div>
-    </div>
-    <div class="alert-card ac-blue">
-      <div class="ac-title"><i class="ti ti-list-check"></i> 반도체전문인력 요청서 미제출</div>
-      <div class="ac-body">프로그램 요청서 미제출 상태<br>현재 14개 권한 보유 (공통 6 + 특화 8)<br><br>→ 특화 8개 실수요 확인 및 공식화<br>→ 담당자 요청서 제출 안내 필요</div>
-    </div>
-    <div class="alert-card ac-green" style="grid-column:1/-1">
-      <div class="ac-title"><i class="ti ti-route"></i> 공통권한 설정 후 권한 부여 원칙 (TO-BE 적용 기준)</div>
-      <div class="ac-body" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:6px 20px;">
-        <span>가. 신분별 공통 프로그램 16개 → 정보기획팀 일괄 기본 설정</span>
-        <span>나. 추가 프로그램 → 관리주체 부서에 개별 요청 (담당자가 직접)</span>
-        <span>다. 팀장 직접 부여 원칙 — 계정 공유·권한위임 지양</span>
-        <span>라. 소속 추가 권한 → 정보기획팀에 별도 요청</span>
-      </div>
-    </div>
-  </div>
-
 </div>
 
 <div class="footer">단국대학교 디지털정보원 정보기획팀 · 기준일 2026.06.01 · 작성 2026.06.15 · Leejongku/auth_for_np_RA</div>
+<script>
+function switchScr(n) {
+  document.getElementById('scr1').style.display = n===1?'block':'none';
+  document.getElementById('scr2').style.display = n===2?'block':'none';
+  document.getElementById('scr-tab1').style.borderBottomColor = n===1?'var(--blue)':'transparent';
+  document.getElementById('scr-tab1').style.color = n===1?'var(--blue)':'var(--text2)';
+  document.getElementById('scr-tab2').style.borderBottomColor = n===2?'var(--blue)':'transparent';
+  document.getElementById('scr-tab2').style.color = n===2?'var(--blue)':'var(--text2)';
+}
+</script>
 
 <script>
 const COMMON_PROGS = [
@@ -467,26 +590,6 @@ const SUMMARY = [
   { short:'반도체소부장혁신융합대학', total:0, common:0, unique:0, members:6 },
   { short:'차세대디스플레이혁신융합대학', total:0, common:0, unique:0, members:17 },
 ];
-
-// Charts
-new Chart(document.getElementById('bizChart'), {
-  type:'doughnut',
-  data:{ labels:['공유사업학사관리 9','수업관리 4','인사 2','학적관리 1'],
-    datasets:[{ data:[9,4,2,1], backgroundColor:['#7c3aed','#059669','#d97706','#2563eb'], borderWidth:0 }] },
-  options:{ responsive:true, maintainAspectRatio:false, plugins:{ legend:{ display:false } } }
-});
-new Chart(document.getElementById('stackChart'), {
-  type:'bar',
-  data:{ labels:['SW중심대학','C-RISE','바이오헬스','반도체전문','사회구조변화','G-RISE'],
-    datasets:[
-      { label:'공통', data:[7,9,13,6,13,2], backgroundColor:'#2563eb', borderWidth:0, borderRadius:3 },
-      { label:'특화', data:[29,0,0,8,1,1], backgroundColor:'#a78bfa', borderWidth:0, borderRadius:3 },
-    ] },
-  options:{ responsive:true, maintainAspectRatio:false,
-    plugins:{ legend:{ display:false } },
-    scales:{ x:{ stacked:true, grid:{color:'rgba(0,0,0,.05)'}, ticks:{font:{size:9},maxRotation:20} },
-             y:{ stacked:true, grid:{color:'rgba(0,0,0,.05)'}, beginAtZero:true } } }
-});
 
 // Heatmap
 const ht = document.getElementById('heatTable');
